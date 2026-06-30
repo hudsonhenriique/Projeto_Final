@@ -1,0 +1,5 @@
+       01  AREA-REQUISICAO-ATUALIZACAO.
+           05 REQ-ATUA-OPERACAO           PIC X(01). 
+           05 REQ-ATUA-CODIGO-CLIENTE     PIC 9(06).
+           05 REQ-ATUA-NOVO-TELEFONE      PIC X(15).
+           05 REQ-ATUA-NOVO-EMAIL         PIC X(40).

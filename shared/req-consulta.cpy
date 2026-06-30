@@ -1,0 +1,3 @@
+       01  AREA-REQUISICAO-CONSULTA.
+           05 REQ-CONS-OPERACAO           PIC X(01). 
+           05 REQ-CONS-CODIGO-CLIENTE     PIC 9(06).
