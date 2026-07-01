@@ -15,3 +15,5 @@ api-dotnet/**/obj/
 # Arquivos de sistema operacional
 .DS_Store
 Thumbs.db
+
+*.yaml
