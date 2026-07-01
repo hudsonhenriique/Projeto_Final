@@ -1,0 +1,101 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. CARGA-INICIAL.
+       AUTHOR. HUDSON HENRIQUE.
+      *--------------------------------------------------------------*
+      * OBJETIVO: CRIAR E POPULAR O ARQUIVO INDEXADO DE CLIENTES     *
+      *--------------------------------------------------------------*
+
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+      * O GnuCOBOL cria o arquivo na pasta data
+           SELECT ARQUIVO-CLIENTES ASSIGN TO "../data/clientes.dat"
+               ORGANIZATION IS INDEXED
+               ACCESS MODE IS SEQUENTIAL
+               RECORD KEY IS CLI-CODIGO
+               FILE STATUS IS WS-STATUS-ARQUIVO.
+
+       DATA DIVISION.
+       FILE SECTION.
+       FD  ARQUIVO-CLIENTES.
+       01  REGISTRO-CLIENTE.
+           05 CLI-CODIGO           PIC 9(06).
+           05 CLI-NOME             PIC X(30).
+           05 CLI-TELEFONE         PIC X(15).
+           05 CLI-EMAIL            PIC X(40).
+
+       WORKING-STORAGE SECTION.
+       01  WS-STATUS-ARQUIVO       PIC X(02) VALUE SPACES.
+
+       PROCEDURE DIVISION.
+       0000-PRINCIPAL.
+           PERFORM 1000-INICIALIZAR-BANCO.
+           PERFORM 2000-CADASTRAR-CLIENTES.
+           PERFORM 3000-FINALIZAR.
+           STOP RUN.
+
+       1000-INICIALIZAR-BANCO.
+           DISPLAY "========================================".
+           DISPLAY "INICIANDO CARGA DO BANCO DE DADOS...".
+           
+      * OPEN OUTPUT cria o arquivo do zero 
+           OPEN OUTPUT ARQUIVO-CLIENTES.
+           IF WS-STATUS-ARQUIVO NOT = "00"
+              DISPLAY "ERRO FATAL AO CRIAR ARQUIVO: " WS-STATUS-ARQUIVO
+              STOP RUN.
+
+       2000-CADASTRAR-CLIENTES.
+           MOVE 000001 TO CLI-CODIGO.
+           MOVE "HUDSON HENRIQUE" TO CLI-NOME.
+           MOVE "31999998888" TO CLI-TELEFONE.
+           MOVE "HUDSON@EMAIL.COM" TO CLI-EMAIL.
+           WRITE REGISTRO-CLIENTE
+              INVALID KEY
+                 DISPLAY "ERRO - CLIENTE 01: " WS-STATUS-ARQUIVO.
+           IF WS-STATUS-ARQUIVO = "00"
+              DISPLAY "CLIENTE 000001 (HUDSON) INSERIDO.".
+  
+           MOVE 000002 TO CLI-CODIGO.
+           MOVE "MARILAINE BATISTA" TO CLI-NOME.
+           MOVE "31988887777" TO CLI-TELEFONE.
+           MOVE "MARILAINE@EMAIL.COM" TO CLI-EMAIL.
+           WRITE REGISTRO-CLIENTE
+              INVALID KEY
+                 DISPLAY "ERRO - CLIENTE 02: " WS-STATUS-ARQUIVO.
+           IF WS-STATUS-ARQUIVO = "00"
+              DISPLAY "CLIENTE 000002 (MARILAINE) INSERIDO.".
+
+           MOVE 000003 TO CLI-CODIGO.
+           MOVE "HENRIQUE BATISTA" TO CLI-NOME.
+           MOVE "1140005000" TO CLI-TELEFONE.
+           MOVE "HENRIQUE@EMAIL.COM" TO CLI-EMAIL.
+           WRITE REGISTRO-CLIENTE
+              INVALID KEY
+                 DISPLAY "ERRO - CLIENTE 03: " WS-STATUS-ARQUIVO.
+           IF WS-STATUS-ARQUIVO = "00"
+              DISPLAY "CLIENTE 000003 (HENRIQUE) INSERIDO.".
+
+           MOVE 000004 TO CLI-CODIGO.
+           MOVE "ANA CLARA SILVA" TO CLI-NOME.
+           MOVE "31977776666" TO CLI-TELEFONE.
+           MOVE "ANA@EMAIL.COM" TO CLI-EMAIL.
+           WRITE REGISTRO-CLIENTE
+              INVALID KEY
+                 DISPLAY "ERRO - CLIENTE 04: " WS-STATUS-ARQUIVO.
+           IF WS-STATUS-ARQUIVO = "00"
+              DISPLAY "CLIENTE 000004 (ANA) INSERIDO.".
+
+           MOVE 000005 TO CLI-CODIGO.
+           MOVE "CARLOS ANDRADE" TO CLI-NOME.
+           MOVE "31966665555" TO CLI-TELEFONE.
+           MOVE "CARLOS@EMAIL.COM" TO CLI-EMAIL.
+           WRITE REGISTRO-CLIENTE
+              INVALID KEY
+                 DISPLAY "ERRO - CLIENTE 05: " WS-STATUS-ARQUIVO.
+           IF WS-STATUS-ARQUIVO = "00"
+              DISPLAY "CLIENTE 000005 (CARLOS) INSERIDO.".
+
+       3000-FINALIZAR.
+           CLOSE ARQUIVO-CLIENTES.
+           DISPLAY "BANCO DE DADOS POPULADO COM SUCESSO!".
+           DISPLAY "========================================".
