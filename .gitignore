@@ -1,0 +1,17 @@
+# Arquivos compilados do COBOL
+*.exe
+*.dll
+*.so
+*.o
+
+# Arquivos do banco de dados legado e arquivos de transacao
+cobol/data/*.dat
+cobol/data/*.txt
+
+# Pastas de compilacao do C# 
+api-dotnet/**/bin/
+api-dotnet/**/obj/
+
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
