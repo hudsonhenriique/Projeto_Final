@@ -8,10 +8,10 @@ namespace ClienteModernizacao.Api.Controllers
     [Route("api/[controller]")] 
     public class ClientsController : ControllerBase
     {
-        private readonly FileIntegrationService _integrationService;
+        private readonly IClientIntegrationService _integrationService;
 
         // O C# injeta o servico automaticamente aqui
-        public ClientsController(FileIntegrationService integrationService)
+        public ClientsController(IClientIntegrationService integrationService)
         {
             _integrationService = integrationService;
         }

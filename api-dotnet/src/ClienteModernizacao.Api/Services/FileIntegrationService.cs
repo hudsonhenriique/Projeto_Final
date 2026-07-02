@@ -5,11 +5,17 @@ using ClienteModernizacao.Api.Models;
 
 namespace ClienteModernizacao.Api.Services
 {
-    public class FileIntegrationService
+    public class FileIntegrationService : IClientIntegrationService
     {
-        // O C# roda dentro da pasta do projeto, entao voltamos 3 niveis (..\..\) para chegar na raiz do monorepo
-        private readonly string _cobolDataFolder = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "..", "..", "..", "cobol", "data"));
-        private readonly string _cobolSrcFolder = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "..", "..", "..", "cobol", "src"));
+        private readonly string _cobolDataFolder;
+        private readonly string _cobolSrcFolder;
+
+        public FileIntegrationService()
+        {
+            string repositoryRoot = ResolveRepositoryRoot();
+            _cobolDataFolder = Path.Combine(repositoryRoot, "cobol", "data");
+            _cobolSrcFolder = Path.Combine(repositoryRoot, "cobol", "src");
+        }
 
         public ClientQueryResponse ConsultarCliente(ClientQueryRequest request)
         {
@@ -88,6 +94,31 @@ namespace ClienteModernizacao.Api.Services
             {
                 process?.WaitForExit(); 
             }
+        }
+
+        private static string ResolveRepositoryRoot()
+        {
+            string[] candidates = { AppContext.BaseDirectory, Environment.CurrentDirectory };
+
+            foreach (var candidate in candidates)
+            {
+                var current = new DirectoryInfo(candidate);
+
+                while (current != null)
+                {
+                    string dataPath = Path.Combine(current.FullName, "cobol", "data");
+                    string srcPath = Path.Combine(current.FullName, "cobol", "src");
+
+                    if (Directory.Exists(dataPath) && Directory.Exists(srcPath))
+                    {
+                        return current.FullName;
+                    }
+
+                    current = current.Parent;
+                }
+            }
+
+            throw new DirectoryNotFoundException("Não foi possível localizar a pasta do repositório com os arquivos COBOL.");
         }
     }
 }
