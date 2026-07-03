@@ -1,17 +1,21 @@
 # Usa a imagem oficial do .NET 10
 FROM mcr.microsoft.com/dotnet/sdk:10.0
 
+# Instala o GnuCOBOL
 RUN apt-get update && apt-get install -y gnucobol
 
+# Define a pasta raiz de trabalho
 WORKDIR /app
 
+# Copia as pastas necessárias 
 COPY ./api-dotnet ./api-dotnet
 COPY ./cobol ./cobol
+COPY ./shared ./shared
 
 # Remove binários do Windows
 RUN rm -f /app/cobol/data/*.dat /app/cobol/data/resp-*.txt
 
-# Compila o COBOL encadeando os comandos com && para criar apenas uma camada no Docker
+# Compila o COBOL encadeando os comandos
 WORKDIR /app/cobol/src
 RUN cobc -x -o client-query client-query.cbl && \
     cobc -x -o client-update client-update.cbl && \
