@@ -1,14 +1,18 @@
 var builder = WebApplication.CreateBuilder(args);
 
 
-string frontendUrl = builder.Configuration["FRONTEND_URL"] ?? "http://127.0.0.1:5500";
-string localHostUrl = builder.Configuration["LocalHostUrl"] ?? "http://localhost:5500";
+string frontendUrl = builder.Configuration["FRONTEND_URL"] ?? builder.Configuration["LocalDevUrls:IP"] ?? "";
+string localHostUrl = builder.Configuration["LocalDevUrls:Localhost"] ?? "";
 
 builder.Services.AddCors(options => {
     options.AddPolicy("FrontendPolicy", policy => {
-        policy.WithOrigins(frontendUrl, localHostUrl)
-              .AllowAnyMethod()
-              .AllowAnyHeader();
+
+        if (!string.IsNullOrEmpty(frontendUrl) && !string.IsNullOrEmpty(localHostUrl))
+        {
+            policy.WithOrigins(frontendUrl, localHostUrl)
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+        }
     });
 });
 
