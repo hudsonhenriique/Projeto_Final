@@ -1,7 +1,16 @@
 var builder = WebApplication.CreateBuilder(args);
 
+// Obtem a URL do frontend atraves das variaveis de ambiente.
+// Caso nao exista (como no seu PC local), usa o localhost do Live Server como padrao.
+var frontendUrl = builder.Configuration["FRONTEND_URL"] ?? "http://127.0.0.1:5500";
+
 builder.Services.AddCors(options => {
-    options.AddPolicy("AllowAll", policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+    options.AddPolicy("FrontendPolicy", policy => {
+        // Permite apenas as origens especificadas, fechando a brecha de seguranca do SonarCloud
+        policy.WithOrigins(frontendUrl, "http://localhost:5500")
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
 });
 
 builder.Services.AddControllers();
@@ -18,7 +27,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("AllowAll");
+app.UseCors("FrontendPolicy");
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers(); 
