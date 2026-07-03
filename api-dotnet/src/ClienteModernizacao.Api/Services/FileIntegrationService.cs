@@ -8,14 +8,16 @@ namespace ClienteModernizacao.Api.Services
 {
     public class FileIntegrationService : IClientIntegrationService
     {
+        private const string CobolFolderName = "cobol";
+        
         private readonly string _cobolDataFolder;
         private readonly string _cobolSrcFolder;
 
         public FileIntegrationService()
         {
             string repositoryRoot = ResolveRepositoryRoot();
-            _cobolDataFolder = Path.Combine(repositoryRoot, "cobol", "data");
-            _cobolSrcFolder = Path.Combine(repositoryRoot, "cobol", "src");
+            _cobolDataFolder = Path.Combine(repositoryRoot, CobolFolderName, "data");
+            _cobolSrcFolder = Path.Combine(repositoryRoot, CobolFolderName, "src");
         }
 
         public ClientQueryResponse ConsultarCliente(ClientQueryRequest request)
@@ -33,7 +35,7 @@ namespace ClienteModernizacao.Api.Services
             
             if (!File.Exists(respPath))
             {
-                throw new Exception("O COBOL nao gerou o arquivo de resposta.");
+                throw new FileNotFoundException("O COBOL nao gerou o arquivo de resposta.", respPath);
             }
 
             string linhaResposta = File.ReadAllText(respPath).PadRight(142, ' ');
@@ -68,7 +70,7 @@ namespace ClienteModernizacao.Api.Services
             
             if (!File.Exists(respPath))
             {
-                throw new Exception("O COBOL nao gerou o arquivo de resposta de atualizacao.");
+                throw new FileNotFoundException("O COBOL nao gerou o arquivo de resposta de atualizacao.", respPath);
             }
 
             string linhaResposta = File.ReadAllText(respPath).PadRight(51, ' ');
@@ -97,7 +99,7 @@ namespace ClienteModernizacao.Api.Services
             }
         }
 
-        private string ObterNomeExecutavel(string nomeBase)
+        private static string ObterNomeExecutavel(string nomeBase)
         {
             return RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? $"{nomeBase}.exe" : nomeBase;
         }
@@ -112,8 +114,8 @@ namespace ClienteModernizacao.Api.Services
 
                 while (current != null)
                 {
-                    string dataPath = Path.Combine(current.FullName, "cobol", "data");
-                    string srcPath = Path.Combine(current.FullName, "cobol", "src");
+                    string dataPath = Path.Combine(current.FullName, CobolFolderName, "data");
+                    string srcPath = Path.Combine(current.FullName, CobolFolderName, "src");
 
                     if (Directory.Exists(dataPath) && Directory.Exists(srcPath))
                     {

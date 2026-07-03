@@ -17,6 +17,8 @@ namespace ClienteModernizacao.Api.Controllers
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(ClientQueryResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Consultar(string id)
         {
             var request = new ClientQueryRequest { ClientId = id };
@@ -29,6 +31,8 @@ namespace ClienteModernizacao.Api.Controllers
         }
 
         [HttpPut]
+        [ProducesResponseType(typeof(ClientUpdateResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Atualizar([FromBody] ClientUpdateRequest request)
         {
             var response = _integrationService.UpdateClient(request);
