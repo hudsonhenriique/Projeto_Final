@@ -6,7 +6,7 @@
     <title>Montreal Integrator | COBOL Core</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2LmjXR+v8+9eKqIR2ztLiI6CDMS4yqMSEU" crossorigin="anonymous">
 </head>
 <body>
     <div class="background-glow"></div>
@@ -59,7 +59,7 @@
                         <label>Nome do Cliente (Somente Leitura)</label>
                         <div class="input-group readonly-group">
                             <i class="fa-regular fa-user"></i>
-                            <input type="text" id="edit-nome" title="Nome do Cliente" placeholder="Nome do Cliente" readonly>
+                            <input type="text" id="edit-nome" title="Nome do Cliente" placeholder="Nome do Cliente" aria-label="Nome do Cliente" readonly>
                         </div>
                     </div>
 
@@ -68,7 +68,7 @@
                             <label>Telefone</label>
                             <div class="input-group">
                                 <i class="fa-solid fa-phone"></i>
-                                <input type="text" id="edit-telefone" title="Telefone" placeholder="(00) 00000-0000">
+                                <input type="text" id="edit-telefone" title="Telefone" placeholder="(00) 00000-0000" aria-label="Telefone do Cliente">
                             </div>
                         </div>
 
@@ -76,7 +76,7 @@
                             <label>E-mail</label>
                             <div class="input-group">
                                 <i class="fa-solid fa-envelope"></i>
-                                <input type="email" id="edit-email" title="E-mail" placeholder="cliente@email.com">
+                                <input type="email" id="edit-email" title="E-mail" placeholder="cliente@email.com" aria-label="E-mail do Cliente">
                             </div>
                         </div>
                     </div>
