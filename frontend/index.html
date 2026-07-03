@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Montreal Integrator | COBOL Core</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-glow"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fa-solid fa-microchip"></i>
+                <h1>Montreal <span>Core Integrator</span></h1>
+            </div>
+        </header>
+
+        <main>
+            <!-- Painel de Consulta -->
+            <section class="panel glass-panel" id="search-panel">
+                <div class="panel-header">
+                    <h2><i class="fa-solid fa-magnifying-glass"></i> Consulta de Cliente</h2>
+                    <p>Busque clientes diretamente no banco de dados.</p>
+                </div>
+                
+                <div class="search-box">
+                    <div class="input-group">
+                        <i class="fa-solid fa-fingerprint"></i>
+                        <label for="search-codigo" class="sr-only" style="display:none;">Código do Cliente</label>
+                        <input type="number" id="search-codigo" title="Código do Cliente" placeholder="Código do Cliente (ex: 123)" autocomplete="off">
+                    </div>
+                    <button type="button" id="btn-search" class="btn btn-primary">
+                        <i class="fa-solid fa-satellite-dish"></i> Buscar no Mainframe
+                    </button>
+                </div>
+                
+                <div id="search-result" class="result-box hidden">
+                    <div class="result-content">
+                        <!-- Injetado via JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Painel de Edição (Escondido até buscar) -->
+            <section class="panel glass-panel hidden" id="edit-panel">
+                <div class="panel-header">
+                    <h2><i class="fa-solid fa-pen-to-square"></i> Atualização Cadastral</h2>
+                    <p>Altere os dados de contato do cliente selecionado.</p>
+                </div>
+
+                <form id="edit-form">
+                    <input type="hidden" id="edit-codigo">
+                    
+                    <div class="form-group">
+                        <label>Nome do Cliente (Somente Leitura)</label>
+                        <div class="input-group readonly-group">
+                            <i class="fa-regular fa-user"></i>
+                            <input type="text" id="edit-nome" title="Nome do Cliente" placeholder="Nome do Cliente" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Telefone</label>
+                            <div class="input-group">
+                                <i class="fa-solid fa-phone"></i>
+                                <input type="text" id="edit-telefone" title="Telefone" placeholder="(00) 00000-0000">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>E-mail</label>
+                            <div class="input-group">
+                                <i class="fa-solid fa-envelope"></i>
+                                <input type="email" id="edit-email" title="E-mail" placeholder="cliente@email.com">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" id="btn-cancel" class="btn btn-secondary">
+                            <i class="fa-solid fa-xmark"></i> Cancelar
+                        </button>
+                        <button type="submit" id="btn-save" class="btn btn-success">
+                            <i class="fa-solid fa-floppy-disk"></i> Gravar Modificações
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </main>
+        
+        <footer>
+            <p>Integração &bull; .NET Web API &bull; GnuCOBOL Backend</p>
+        </footer>
+    </div>
+
+    <!-- Notificações flutuantes (Toast) -->
+    <div id="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
