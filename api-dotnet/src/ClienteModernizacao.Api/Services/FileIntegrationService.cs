@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using ClienteModernizacao.Api.Models;
 
 namespace ClienteModernizacao.Api.Services
@@ -26,7 +27,7 @@ namespace ClienteModernizacao.Api.Services
             string reqPath = Path.Combine(_cobolDataFolder, "req-consulta.txt");
             File.WriteAllText(reqPath, linhaRequisicao);
 
-            ExecutarCobol("client-query.exe");
+            ExecutarCobol(ObterNomeExecutavel("client-query"));
 
             string respPath = Path.Combine(_cobolDataFolder, "resp-consulta.txt");
             
@@ -61,7 +62,7 @@ namespace ClienteModernizacao.Api.Services
             string reqPath = Path.Combine(_cobolDataFolder, "req-atualizacao.txt");
             File.WriteAllText(reqPath, linhaRequisicao);
 
-            ExecutarCobol("client-update.exe");
+            ExecutarCobol(ObterNomeExecutavel("client-update"));
 
             string respPath = Path.Combine(_cobolDataFolder, "resp-atualizacao.txt");
             
@@ -94,6 +95,11 @@ namespace ClienteModernizacao.Api.Services
             {
                 process?.WaitForExit(); 
             }
+        }
+
+        private string ObterNomeExecutavel(string nomeBase)
+        {
+            return RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? $"{nomeBase}.exe" : nomeBase;
         }
 
         private static string ResolveRepositoryRoot()
