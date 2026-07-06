@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:5085/api/Clients';
+const BASE_URL = 'https://projetofinal-production-2e65.up.railway.app/api/Clients';
 
 // Elementos do DOM
 const searchInput = document.getElementById('search-codigo');
