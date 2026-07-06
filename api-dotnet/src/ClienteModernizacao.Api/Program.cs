@@ -34,6 +34,23 @@ builder.Services.AddScoped<ClienteModernizacao.Api.Services.IClientIntegrationSe
 
 var app = builder.Build();
 
+app.UseExceptionHandler(errorApp =>
+{
+    errorApp.Run(async context =>
+    {
+        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+        context.Response.ContentType = "application/json";
+        context.Response.Headers["Access-Control-Allow-Origin"] = "https://projeto-final-sigma-eight.vercel.app";
+        context.Response.Headers["Access-Control-Allow-Methods"] = "GET,PUT,POST,DELETE,OPTIONS";
+        context.Response.Headers["Access-Control-Allow-Headers"] = "Content-Type";
+
+        var errorFeature = context.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerPathFeature>();
+        var errorMessage = errorFeature?.Error?.Message ?? "Internal Server Error";
+
+        await context.Response.WriteAsync(System.Text.Json.JsonSerializer.Serialize(new { error = errorMessage }));
+    });
+});
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

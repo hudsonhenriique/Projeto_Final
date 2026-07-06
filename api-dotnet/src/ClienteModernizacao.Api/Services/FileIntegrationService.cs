@@ -106,10 +106,28 @@ namespace ClienteModernizacao.Api.Services
 
         private static string ResolveRepositoryRoot()
         {
-            string[] candidates = { AppContext.BaseDirectory, Environment.CurrentDirectory };
+            string cobolRootOverride = Environment.GetEnvironmentVariable("COBOL_ROOT");
+            if (!string.IsNullOrEmpty(cobolRootOverride))
+            {
+                var root = Path.GetFullPath(cobolRootOverride!);
+                string dataPath = Path.Combine(root, CobolFolderName, "data");
+                string srcPath = Path.Combine(root, CobolFolderName, "src");
+
+                if (Directory.Exists(dataPath) && Directory.Exists(srcPath))
+                {
+                    return root;
+                }
+            }
+
+            string[] candidates = { AppContext.BaseDirectory, Environment.CurrentDirectory, "/app", "/usr/src/app" };
 
             foreach (var candidate in candidates)
             {
+                if (string.IsNullOrWhiteSpace(candidate))
+                {
+                    continue;
+                }
+
                 var current = new DirectoryInfo(candidate);
 
                 while (current != null)
@@ -126,7 +144,7 @@ namespace ClienteModernizacao.Api.Services
                 }
             }
 
-            throw new DirectoryNotFoundException("Não foi possível localizar a pasta do repositório com os arquivos COBOL.");
+            throw new DirectoryNotFoundException("Não foi possível localizar a pasta do repositório com os arquivos COBOL. Verifique se /app/cobol está presente no container ou defina a variável de ambiente COBOL_ROOT.");
         }
     }
 }

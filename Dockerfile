@@ -22,6 +22,9 @@ RUN cobc -x -o client-query client-query.cbl && \
     cobc -x -o carga-inicial carga-inicial.cbl && \
     ./carga-inicial
 
+# Define a variável de ambiente usada pelo serviço COBOL para localizar o repositório
+ENV COBOL_ROOT=/app
+
 # Volta para a pasta da API
 WORKDIR /app/api-dotnet/src/ClienteModernizacao.Api
 
