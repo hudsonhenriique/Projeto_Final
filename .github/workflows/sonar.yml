@@ -36,8 +36,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          LC_ALL: 'en_US.UTF-8'
-          LANG: 'en_US.UTF-8'
         run: |
           dotnet-sonarscanner begin /k:"hudsonhenriique_Projeto_Final" /o:"hudsonhenriique" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
           
