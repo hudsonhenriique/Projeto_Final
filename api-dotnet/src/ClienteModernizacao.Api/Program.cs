@@ -6,13 +6,23 @@ string localHostUrl = builder.Configuration["LocalDevUrls:Localhost"] ?? "";
 
 builder.Services.AddCors(options => {
     options.AddPolicy("FrontendPolicy", policy => {
+        var allowedOrigins = new List<string>();
 
-        if (!string.IsNullOrEmpty(frontendUrl) && !string.IsNullOrEmpty(localHostUrl))
+        if (!string.IsNullOrEmpty(frontendUrl))
         {
-            policy.WithOrigins(frontendUrl, localHostUrl)
-                  .AllowAnyMethod()
-                  .AllowAnyHeader();
+            allowedOrigins.Add(frontendUrl);
         }
+
+        if (!string.IsNullOrEmpty(localHostUrl))
+        {
+            allowedOrigins.Add(localHostUrl);
+        }
+
+        allowedOrigins.Add("https://projeto-final-sigma-eight.vercel.app");
+
+        policy.WithOrigins(allowedOrigins.ToArray())
+              .AllowAnyMethod()
+              .AllowAnyHeader();
     });
 });
 
