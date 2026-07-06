@@ -153,7 +153,7 @@ cd Projeto_Final
 ## 2. Executar a API
 
 ```bash
-cd api-dotnet/src
+cd api-dotnet/src/ClienteModernizacao.Api
 dotnet restore
 dotnet build
 dotnet run
