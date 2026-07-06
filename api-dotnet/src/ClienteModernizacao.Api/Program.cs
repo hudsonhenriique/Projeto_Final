@@ -61,5 +61,5 @@ app.UseCors("FrontendPolicy");
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers(); 
-
+// Trigger analysis
 await app.RunAsync();
