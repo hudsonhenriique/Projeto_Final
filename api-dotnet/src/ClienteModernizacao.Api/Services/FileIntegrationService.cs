@@ -20,6 +20,12 @@ namespace ClienteModernizacao.Api.Services
             _cobolSrcFolder = Path.Combine(repositoryRoot, CobolFolderName, "src");
         }
 
+        protected FileIntegrationService(string repositoryRoot)
+        {
+            _cobolDataFolder = Path.Combine(repositoryRoot, CobolFolderName, "data");
+            _cobolSrcFolder = Path.Combine(repositoryRoot, CobolFolderName, "src");
+        }
+
         public ClientQueryResponse ConsultarCliente(ClientQueryRequest request)
         {
             // Operacao '0' (Consulta) + Codigo de 6 posicoes com zeros a esquerda
@@ -83,7 +89,7 @@ namespace ClienteModernizacao.Api.Services
             };
         }
 
-        private void ExecutarCobol(string executavel)
+        protected virtual void ExecutarCobol(string executavel)
         {
             var processInfo = new ProcessStartInfo
             {
