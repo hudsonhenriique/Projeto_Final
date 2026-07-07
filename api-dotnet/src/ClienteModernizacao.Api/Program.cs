@@ -40,9 +40,9 @@ app.UseExceptionHandler(errorApp =>
     {
         context.Response.StatusCode = StatusCodes.Status500InternalServerError;
         context.Response.ContentType = "application/json";
-        context.Response.Headers["Access-Control-Allow-Origin"] = "https://projeto-final-sigma-eight.vercel.app";
-        context.Response.Headers["Access-Control-Allow-Methods"] = "GET,PUT,POST,DELETE,OPTIONS";
-        context.Response.Headers["Access-Control-Allow-Headers"] = "Content-Type";
+        context.Response.Headers.AccessControlAllowOrigin = "https://projeto-final-sigma-eight.vercel.app";
+        context.Response.Headers.AccessControlAllowMethods = "GET,PUT,POST,DELETE,OPTIONS";
+        context.Response.Headers.AccessControlAllowHeaders = "Content-Type";
 
         var errorFeature = context.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerPathFeature>();
         var errorMessage = errorFeature?.Error?.Message ?? "Internal Server Error";

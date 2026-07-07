@@ -106,10 +106,10 @@ namespace ClienteModernizacao.Api.Services
 
         private static string ResolveRepositoryRoot()
         {
-            string cobolRootOverride = Environment.GetEnvironmentVariable("COBOL_ROOT");
+            string? cobolRootOverride = Environment.GetEnvironmentVariable("COBOL_ROOT");
             if (!string.IsNullOrEmpty(cobolRootOverride))
             {
-                var root = Path.GetFullPath(cobolRootOverride!);
+                var root = Path.GetFullPath(cobolRootOverride);
                 string dataPath = Path.Combine(root, CobolFolderName, "data");
                 string srcPath = Path.Combine(root, CobolFolderName, "src");
 
