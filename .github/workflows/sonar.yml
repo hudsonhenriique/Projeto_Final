@@ -44,5 +44,4 @@ jobs:
           dotnet test api-dotnet/tests/ClienteModernizacao.Tests/ClienteModernizacao.Tests.csproj --no-build --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
           
           dotnet-sonarscanner end
-          env:
  
