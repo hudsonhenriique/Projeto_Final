@@ -1,10 +1,14 @@
 # Modernização de Sistema Legado: Cooperativa Financeira Alfa
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=hudsonhenriique_Projeto_Final&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=hudsonhenriique_Projeto_Final)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=hudsonhenriique_Projeto_Final&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=hudsonhenriique_Projeto_Final) [![Frontend](https://img.shields.io/badge/Frontend-Online-success)](https://projeto-final-sigma-eight.vercel.app/) [![API](https://img.shields.io/badge/API-Railway-blue)](https://projetofinal-production-2e65.up.railway.app)
+
+> ** Ambientes em Produção (Live Demo)**
+> * **Interface Web (Frontend):** [Acessar a Aplicação](https://projeto-final-sigma-eight.vercel.app/)
+> * **API .NET (Backend):** [Acessar a API no Railway](https://projetofinal-production-2e65.up.railway.app)
 
 ---
 
-# Visão Geral
+## Visão Geral
 
 Este projeto é uma Prova de Conceito (PoC) desenvolvida para demonstrar como um sistema legado em COBOL pode ser modernizado sem a necessidade de substituí-lo completamente.
 
@@ -15,59 +19,38 @@ Em vez de substituir esse sistema, a proposta foi criar uma nova camada de acess
 Agora, os atendentes podem consultar e atualizar informações de contato dos clientes por meio de uma interface web simples e intuitiva, enquanto o sistema legado continua sendo responsável pelo processamento das informações.
 
 Dessa forma, foi possível unir:
-
-- a robustez do sistema legado;
-- a facilidade de uso das aplicações modernas;
-- a preparação para futuras integrações;
-- a preservação das regras de negócio já existentes.
-
----
-
-# Tecnologias Utilizadas
-
-## Backend e Integração
-
-- **C# .NET 10**
-  - Desenvolvimento da Web API responsável pela comunicação entre a aplicação web e o sistema legado.
-
-- **COBOL**
-  - Sistema responsável pelo processamento das informações dos clientes e pela persistência dos dados.
+* A robustez do sistema legado;
+* A facilidade de uso das aplicações modernas;
+* A preparação para futuras integrações;
+* A preservação das regras de negócio já existentes.
 
 ---
 
-## Frontend
+## Tecnologias Utilizadas
 
-- **HTML5**
-- **CSS3**
-- **JavaScript**
+### Backend e Integração
+* **C# .NET 10:** Desenvolvimento da Web API responsável pela comunicação entre a aplicação web e o sistema legado.
+* **COBOL:** Sistema responsável pelo processamento das informações dos clientes e pela persistência dos dados.
 
-Tecnologias utilizadas para construir uma interface leve, simples e responsiva.
+### Frontend
+* **HTML5, CSS3 e JavaScript:** Tecnologias utilizadas para construir uma interface leve, simples e responsiva.
 
----
-
-## DevOps, Qualidade e Infraestrutura
-
-- **Docker**
-  - Conteinerização da aplicação, garantindo consistência entre diferentes ambientes.
-
-- **GitHub Actions**
-  - Automação de build, testes e validações do projeto.
-
-- **SonarCloud**
-  - Análise automática de qualidade, segurança e manutenibilidade do código.
+### DevOps, Qualidade e Infraestrutura
+* **Docker:** Conteinerização da aplicação, garantindo consistência entre diferentes ambientes.
+* **GitHub Actions:** Automação de build, testes e validações do projeto (CI/CD).
+* **SonarCloud:** Análise automática de qualidade, segurança e manutenibilidade do código.
 
 ---
 
-# Funcionalidades
+## Funcionalidades
 
 A solução permite:
+* Consultar um cliente pelo código;
+* Visualizar seus dados cadastrais;
+* Atualizar telefone e e-mail;
+* Informar de forma clara quando um cliente não é encontrado.
 
-- Consultar um cliente pelo código;
-- Visualizar seus dados cadastrais;
-- Atualizar telefone e e-mail;
-- Informar quando um cliente não é encontrado.
-
-As funcionalidades de cadastro e exclusão de clientes não fazem parte do escopo deste projeto.
+*Nota: As funcionalidades de cadastro e exclusão de clientes não fazem parte do escopo deste projeto.*
 
 ---
 
