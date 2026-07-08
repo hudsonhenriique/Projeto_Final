@@ -4,7 +4,7 @@
 
 > ** Ambientes em Produção (Live Demo)**
 > * **Interface Web (Frontend):** [Acessar a Aplicação](https://projeto-final-sigma-eight.vercel.app/)
-> * **API .NET (Backend):** [Acessar a API no Railway](https://projetofinal-production-2e65.up.railway.app)
+> * **API .NET (Backend):** O servidor está operando no Railway atuando como motor do projeto. O *Base URL* para consumo do Frontend é: `https://projetofinal-production-2e65.up.railway.app`
 
 ---
 
